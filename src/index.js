@@ -4,8 +4,6 @@ import './index.css';
 import Chart from 'chart.js';
 import 'chartjs-plugin-colorschemes';
 
-#aa
-
 const stat={
   name:"名前",
   a:"A%",
@@ -1087,8 +1085,8 @@ function optimize(state){
       x = {a:optimizeresult.a[p-1]-state.a,b:optimizeresult.b[p-1]-state.b,h:optimizeresult.h[p-1]-state.h,c:optimizeresult.c[p-1]-state.c,d:optimizeresult.d[p-1]-state.d,t:maxdivloop*p,damage:0};
     }
     let di;
-    for(let i=0 ; Math.abs((db-da)/db) >  1e-8 ; i++){
-      epp = 5/(i+1);
+    epp = 0.1;
+    for(let i=0 ; Math.abs((db-da)/db) >  1e-10 ; i++){
       di = diff(state,x);
       x.a = x.a - epp * di.a;
       x.b = x.b - epp * di.b;
