@@ -4,8 +4,6 @@ import './index.css';
 import Chart from 'chart.js';
 import 'chartjs-plugin-colorschemes';
 
-
-
 const stat={
   name:"名前",
   a:"A%",
@@ -177,10 +175,10 @@ function Charcreate(props){
           <Select name={props.inputst.data[3]} />
           <Select name={props.inputst.data[4]} />
           <Select name={props.inputst.data[5]} />
-          <Select name={{...props.inputst.data[6],...{a:24,b:30,h:24,ahs:1.2,ea:15,em:187,ac:0,bc:0,hc:0},...props.inputst.data[6]}} />
-          <Select name={{...props.inputst.data[7],...{a:24,b:30,h:24,ahs:1.2,ea:15,em:187,ac:0,bc:0,hc:0},...props.inputst.data[7]}} />
-          <Select name={{...props.inputst.data[8],...{a:24,b:30,h:24,ahs:1.2,ea:15,em:187,ac:0,bc:0,hc:0},...props.inputst.data[8]}} />
-          <Select name={{...props.inputst.data[9],...{a:24,b:30,h:24,ahs:1.2,ea:15,em:187,ac:0,bc:0,hc:0},...props.inputst.data[9]}} />
+          <Select name={{...props.inputst.data[6],...{a:24,b:30,h:24,ahs:1.2,ea:15,em:187},...props.inputst.data[6]}} />
+          <Select name={{...props.inputst.data[7],...{a:24,b:30,h:24,ahs:1.2,ea:15,em:187},...props.inputst.data[7]}} />
+          <Select name={{...props.inputst.data[8],...{a:24,b:30,h:24,ahs:1.2,ea:15,em:187},...props.inputst.data[8]}} />
+          <Select name={{...props.inputst.data[9],...{a:24,b:30,h:24,ahs:1.2,ea:15,em:187},...props.inputst.data[9]}} />
           <Select name={{...props.inputst.data[10],...{ema:1},...props.inputst.data[10]}}/>
           <Select name={{...props.inputst.data[11],...{a:24,b:30,h:24,ahs:1.2,ea:15,em:187},...props.inputst.data[11]}} />
           </div>
@@ -1087,8 +1085,8 @@ function optimize(state){
       x = {a:optimizeresult.a[p-1]-state.a,b:optimizeresult.b[p-1]-state.b,h:optimizeresult.h[p-1]-state.h,c:optimizeresult.c[p-1]-state.c,d:optimizeresult.d[p-1]-state.d,t:maxdivloop*p,damage:0};
     }
     let di;
-    for(let i=0 ; Math.abs((db-da)/db) >  1e-9 ; i++){
-      epp = 5/(i+1);
+    epp = 0.1;
+    for(let i=0 ; Math.abs((db-da)/db) >  1e-10 ; i++){
       di = diff(state,x);
       x.a = x.a - epp * di.a;
       x.b = x.b - epp * di.b;
