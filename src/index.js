@@ -177,10 +177,10 @@ function Charcreate(props){
           <Select name={props.inputst.data[3]} />
           <Select name={props.inputst.data[4]} />
           <Select name={props.inputst.data[5]} />
-          <Select name={{...props.inputst.data[6],...{a:24,b:30,h:24,ahs:1.2,ea:15,em:187},...props.inputst.data[6]}} />
-          <Select name={{...props.inputst.data[7],...{a:24,b:30,h:24,ahs:1.2,ea:15,em:187},...props.inputst.data[7]}} />
-          <Select name={{...props.inputst.data[8],...{a:24,b:30,h:24,ahs:1.2,ea:15,em:187},...props.inputst.data[8]}} />
-          <Select name={{...props.inputst.data[9],...{a:24,b:30,h:24,ahs:1.2,ea:15,em:187},...props.inputst.data[9]}} />
+          <Select name={{...props.inputst.data[6],...{a:24,b:30,h:24,ahs:1.2,ea:15,em:187,ac:0,bc:0,hc:0},...props.inputst.data[6]}} />
+          <Select name={{...props.inputst.data[7],...{a:24,b:30,h:24,ahs:1.2,ea:15,em:187,ac:0,bc:0,hc:0},...props.inputst.data[7]}} />
+          <Select name={{...props.inputst.data[8],...{a:24,b:30,h:24,ahs:1.2,ea:15,em:187,ac:0,bc:0,hc:0},...props.inputst.data[8]}} />
+          <Select name={{...props.inputst.data[9],...{a:24,b:30,h:24,ahs:1.2,ea:15,em:187,ac:0,bc:0,hc:0},...props.inputst.data[9]}} />
           <Select name={{...props.inputst.data[10],...{ema:1},...props.inputst.data[10]}}/>
           <Select name={{...props.inputst.data[11],...{a:24,b:30,h:24,ahs:1.2,ea:15,em:187},...props.inputst.data[11]}} />
           </div>
