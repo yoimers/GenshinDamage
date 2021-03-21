@@ -1087,7 +1087,7 @@ function optimize(state){
       x = {a:optimizeresult.a[p-1]-state.a,b:optimizeresult.b[p-1]-state.b,h:optimizeresult.h[p-1]-state.h,c:optimizeresult.c[p-1]-state.c,d:optimizeresult.d[p-1]-state.d,t:maxdivloop*p,damage:0};
     }
     let di;
-    for(let i=0 ; Math.abs((db-da)/db) >  1e-9 ; i++){
+    for(let i=0 ; Math.abs((db-da)/db) >  1e-8 ; i++){
       epp = 5/(i+1);
       di = diff(state,x);
       x.a = x.a - epp * di.a;
