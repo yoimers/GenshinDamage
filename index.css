@@ -1,0 +1,419 @@
+/**
+ * html5doctor.com Reset Stylesheet v1.6.1 (http://html5doctor.com/html-5-reset-stylesheet/)
+ * Richard Clark (http://richclarkdesign.com)
+ * http://cssreset.com
+ */
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+body {
+    line-height:1;
+}
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section {
+    display:block;
+}
+nav ul {
+    list-style:none;
+}
+blockquote, q {
+    quotes:none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content:'';
+    content:none;
+}
+a {
+    margin:0;
+    padding:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+/* change colours to suit your needs */
+ins {
+    background-color:#ff9;
+    color:#000;
+    text-decoration:none;
+}
+/* change colours to suit your needs */
+mark {
+    background-color:#ff9;
+    color:#000;
+    font-style:italic;
+    font-weight:bold;
+}
+del {
+    text-decoration: line-through;
+}
+abbr[title], dfn[title] {
+    border-bottom:1px dotted;
+    cursor:help;
+}
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+/* change border colour to suit your needs */
+hr {
+    display:block;
+    height:1px;
+    border:0;
+    border-top:1px solid #cccccc;
+    margin:1em 0;
+    padding:0;
+}
+input, select {
+    vertical-align:middle;
+}
+
+html {
+  font-size: 62.5%;
+}
+body {
+  color: #333;
+  font-size: 1.2rem;
+  font-family: "Hiragino Kaku Gothic ProN",  Meiryo,  sans-serif;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+a:link, a:visited, a:hover, a:active {
+  color: rgb(226, 236, 254);
+  text-decoration: none;
+}
+
+body {
+  font: 14px "Century Gothic", Futura, sans-serif;
+  margin: 20px;
+  background-color:rgb(43, 45, 47);
+}
+
+/* --------------------------------
+ * header
+ * -------------------------------- */
+.header{
+  width:970px;
+  padding: 18px 0 18px;
+  box-shadow: 0 0 5px 1px rgb(164, 160, 142);
+  border-radius:8px;
+  margin:15px auto;
+}
+.logo{
+  display:block;
+  margin:0 auto;
+  text-align:center;
+  font-size:30px;
+  color: rgb(226, 236, 254);
+}
+.log a{
+  display:block;
+  margin:0;
+  width: 100%;
+  height: 100%;
+  color: rgb(226, 236, 254);
+}
+
+.global-nav{
+  margin-top:15px;
+  text-align:center;
+}
+.nav-item{
+  display:inline-block;
+  margin:0 10px;
+}
+.global-nav .nav-item a{
+  display: inline-block;
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 8px;
+  color:rgb(195, 195, 195);
+  font-size:1.4rem;
+  letter-spacing:2px;
+  transition: 0.2s;
+}
+.global-nav .nav-item.active a,
+.global-nav .nav-item a:hover{
+  border: 1px solid #ccc;
+  color:#fff;
+}
+
+.wrapper{
+  display: -webkit-flex;
+  display: flex;
+  height:100%;
+  width:970px;
+  margin:15px auto;
+}
+/* --------------------------------
+ * main
+ * -------------------------------- */
+.main {
+  display: block;
+  width: 80%;
+  border-radius:8px;
+  box-shadow: 0 0 5px 1px rgb(164, 160, 142);
+  margin:0 15px 0 0;
+}
+
+@keyframes main {
+  0% {
+    transform: translateX(180px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+  }
+  40%,100% {
+    opacity: 1;
+  }
+}
+.anim-box.slidein.is-animated {
+  animation: slideIn 1s cubic-bezier(0.25, 1, 0.5, 1) 1 forwards;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(180px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+  }
+  40%,100% {
+    opacity: 1;
+  }
+}
+
+/* --------------------------------
+ * sidemenu
+ * -------------------------------- */
+.sidemenu{
+  position: sticky;
+  display:block;
+  width:20%;
+  height:100%;
+  border-radius:8px;
+  box-shadow: 0 0 5px 1px rgb(164, 160, 142);
+  top: 10px;
+  z-index: 1;
+}
+.appendbox{
+  margin:10px;
+  list-style-type:none;
+}
+.appendbox .append-item{
+  display:block;
+  position:relative;
+  margin-bottom:15px;
+  transition:opacity 0.1s;
+  white-space:nowrap;
+  width:170px;
+  height:100px;
+
+}
+.append-item.appendchar{
+  box-shadow: 0 0 2px 1px rgb(238, 118, 106);
+}
+.append-item.appendarti{
+  box-shadow: 0 0 2px 1px rgb(249, 227, 131);
+}
+.append-item.appendwep{
+  box-shadow: 0 0 2px 1px rgb(77, 67, 164);
+}
+.append-item.culc{
+  margin-top: 40px;
+  box-shadow: 0 0 5px 1px rgb(125, 189, 120);
+}
+.appendbox .append-item:hover{
+  opacity:0.5;
+}
+.appendbox .image{
+  position: absolute;
+  right:0;
+  display:inline-block;
+  height:100px;
+  width: auto;
+}
+.appendbox .append-text{
+  display: inline-block;
+  position: absolute;
+  width:170px;
+  top:0;
+  left:0;
+  font-family: "arial black";
+  color:rgb(195, 195, 195);
+  margin: 0 0 0 0;
+  font-size:3rem;
+  text-align:center;
+  line-height:100px;
+  background-color:rgba(43, 45, 47, 0.8);
+}
+/*入力フォーム*/
+.inputform{
+  display:inline-block;
+  margin:0 2px;
+  width:120px;
+  height:60px;
+}
+.inputform .inputform-input{
+  display:inline-block;
+  width:40%;
+  height:24.4px;
+  text-align:center;
+  font-size:1.3rem;
+  font-weight:bold;
+  padding: 0;
+  background-color:rgb(43, 45, 47);
+  color:rgb(195, 195, 195);
+}
+.inputnameform{
+  display:flex;
+  width:100%;
+  text-align:center;
+  font-size:1.5rem;
+  font-weight:bold;
+  background-color:rgb(43, 45, 47);
+  color:rgb(195, 195, 195);
+  margin:10px 0 10px 0;
+}
+.inputnameform .inputNamelabel{
+  display:inline-block;
+
+  width:50px;
+}
+.inputnameform .inputform-input{
+  display:inline-block;
+  width:80px;
+  height:25px;
+  margin-right:auto;
+  text-align:center;
+  font-size:1.2rem;
+  font-weight:bold;
+  padding: 0;
+  background-color:rgb(43, 45, 47);
+  color:rgb(195, 195, 195);
+}
+.inputnameform .delete-button{
+  margin:0 0 0 auto;
+  width:100px;
+}
+.inputform .inputform-button{
+  display:inline-block;
+  width:15%;
+  padding: 0;
+  font-size:1.5rem;
+  font-weight:bold;
+}
+.form-label{
+  display:block;
+  width:100%;
+  text-align:center;
+  color:rgb(195, 195, 195);
+  font-size:1.5rem;
+  font-weight:bold;
+}
+.form-select{
+  display:block;
+  width:100%;
+  margin:0 auto;
+  text-align: -webkit-center;
+  background-color:rgb(43, 45, 47);
+  color:rgb(195, 195, 195);
+  font-size:1.5rem;
+  font-weight:bold;
+}
+
+/*キャラ入力*/
+.charform{
+  margin: 0;
+  margin-top:1px;
+  padding:1px 5px;
+  border-radius:8px;
+  box-shadow: 0 0 2px 1px rgb(238, 118, 106);
+  animation: slideIn 0.8s cubic-bezier(0.25, 1, 0.5, 1) 1 forwards;
+}
+.artiform{
+  margin-top:2px;
+  padding:1px 5px;
+  border-radius:8px;
+  box-shadow: 0 0 2px 1px rgb(249, 227, 131);
+  animation: slideIn 0.8s cubic-bezier(0.25, 1, 0.5, 1) 1 forwards;
+}
+.artiform .inputform{
+  display:inline-block;
+  width:16.667%;
+  margin:0 0;
+}
+.child1{
+  padding:0 0 0 30px;
+}
+.child2{
+  padding:0 0 0 30px;
+}
+.wepform{
+  margin-top:2px;
+  border-radius:8px;
+  box-shadow: 0 0 2px 1px rgb(77, 67, 164);
+  padding:1px 5px;
+  animation: slideIn 0.8s cubic-bezier(0.25, 1, 0.5, 1) 1 forwards;
+}
+.wepform .inputform{
+  display:inline-block;
+  width:16.667%;
+  margin:0 auto;
+}
+.wepform .rateform{
+  display:inline-block;
+  margin:0 auto;
+  height:10px;
+}
+.rateform .form-label{
+  font-size:1.4rem;
+}
+.wepform .rateform .inputform-input{
+  display:inline-block;
+  width:33%;
+  height:24.4px;
+  text-align:center;
+  font-size:1.0rem;
+  font-weight:bold;
+  padding: 0;
+  background-color:rgb(43, 45, 47);
+  color:rgb(195, 195, 195);
+}
+.form-check-label{
+  color:rgb(195, 195, 195);
+}
+.inputformradio{
+  display:inline-block;
+  margin:0 2px;
+  width:120px;
+  height:60px;
+}
+.none{
+  display:none;
+}
+li {
+	list-style-type:none;		/*リストマーカー無しにする*/
+}
