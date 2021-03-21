@@ -4,7 +4,7 @@ import './index.css';
 import Chart from 'chart.js';
 import 'chartjs-plugin-colorschemes';
 
-
+#aa
 
 const stat={
   name:"名前",
