@@ -234,19 +234,19 @@ function Sidemenu(props){
     return(
     <ul className="appendbox">
       <li id="charappendbutton" className="append-item appendchar" draggable="true" onDragStart={onDragStart}>
-        <img className="image" src="./klee5.png" alt="グラフの画像"/>
+        <img className="image" src="./img/klee5.png" alt="グラフの画像"/>
         <p className="append-text">キャラ追加</p>
       </li>
       <li id="artiappendbutton" className="append-item appendarti" draggable="true" onDragStart={onDragStart}>
-        <img className="image" src="./klee2.png" alt="グラフの画像"/>
+        <img className="image" src="./img/klee2.png" alt="グラフの画像"/>
         <p className="append-text">聖遺物追加</p>
       </li>
       <li id="wepappendbutton" className="append-item appendwep" draggable="true" onDragStart={onDragStart}>
-        <img className="image" src="./klee3.png" alt="グラフの画像"/>
+        <img className="image" src="./img/klee3.png" alt="グラフの画像"/>
         <p className="append-text">武器追加</p>
       </li>
       <li className="append-item culc" draggable="true" onClick={StateCulc}>
-        <img className="image" src="./klee4.png" alt="グラフの画像"/>
+        <img className="image" src="./img/klee4.png" alt="グラフの画像"/>
         <p className="append-text">計算</p>
       </li>
       <a href="https://twitter.com/share" className="twitter-share-button" data-via="よ" data-hashtags="原神">Tweet</a>
