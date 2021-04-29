@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Chart from 'chart.js';
 import 'chartjs-plugin-colorschemes';
+import Klee2 from './img/klee2.png';
+import Klee3 from './img/klee3.png';
+import Klee4 from './img/klee4.png';
+import Klee5 from './img/klee5.png';
+
 
 const stat={
   name:"名前",
@@ -28,9 +33,11 @@ const stat={
   br:"レートB",
   ahs:"HPのx%をAに変換", //スキル
   s:"",
+  r:"期待値-最大値比",
+  select:"厳選レベル",
   n:undefined,
 }
-const chainitpara = [{ab:300},{hb:15000},{bb:800},{c:19.2},{d:88.4},{e:28.8},{s:0},{s:0},{s:0},{s:0},{ema:1},{em:0}];
+const chainitpara = [{ab:300},{hb:15000},{bb:800},{c:5},{d:50},{e:0},{s:0},{s:0},{s:0},{s:0},{ema:1},{em:0}];
 const artinitpara = [{hc:4780},{ac:311},{a:46.6},{e:46.6},{c:31.1},{s:0},{e:15},{ea:0},{s:0},{s:0},{s:0},{s:0}];
 const wepinitpara = [{ab:674},{c:22.1},{s:0},{s:0},{s:0},{ar:100},{br:0},{hr:0}];
 const initpara = {cha:chainitpara,art:artinitpara,wep:wepinitpara};
@@ -177,8 +184,8 @@ function Charcreate(props){
           <Select name={props.inputst.data[5]} />
           <Select name={{...props.inputst.data[6],...{a:24,b:30,h:24,ahs:1.2,ea:15,em:187,ac:0,bc:0,hc:0},...props.inputst.data[6]}} />
           <Select name={{...props.inputst.data[7],...{a:24,b:30,h:24,ahs:1.2,ea:15,em:187,ac:0,bc:0,hc:0},...props.inputst.data[7]}} />
-          <Select name={{...props.inputst.data[8],...{a:24,b:30,h:24,ahs:1.2,ea:15,em:187,ac:0,bc:0,hc:0},...props.inputst.data[8]}} />
-          <Select name={{...props.inputst.data[9],...{a:24,b:30,h:24,ahs:1.2,ea:15,em:187,ac:0,bc:0,hc:0},...props.inputst.data[9]}} />
+          <Select name={{...props.inputst.data[8],...{a:24,b:30,h:24,ahs:1.2,ea:15,em:187,ac:0,bc:0,hc:0,r:20,select:0},...props.inputst.data[8]}} />
+          <Select name={{...props.inputst.data[9],...{a:24,b:30,h:24,ahs:1.2,ea:15,em:187,ac:0,bc:0,hc:0,r:20,select:0},...props.inputst.data[9]}} />
           <Select name={{...props.inputst.data[10],...{ema:1},...props.inputst.data[10]}}/>
           <Select name={{...props.inputst.data[11],...{a:24,b:30,h:24,ahs:1.2,ea:15,em:187},...props.inputst.data[11]}} />
           </div>
@@ -234,23 +241,21 @@ function Sidemenu(props){
     return(
     <ul className="appendbox">
       <li id="charappendbutton" className="append-item appendchar" draggable="true" onDragStart={onDragStart}>
-        <img className="image" src="./img/klee5.png" alt="グラフの画像"/>
+        <img className="image" src={Klee5} alt="グラフの画像"/>
         <p className="append-text">キャラ追加</p>
       </li>
       <li id="artiappendbutton" className="append-item appendarti" draggable="true" onDragStart={onDragStart}>
-        <img className="image" src="./img/klee2.png" alt="グラフの画像"/>
+        <img className="image" src={Klee2} alt="グラフの画像"/>
         <p className="append-text">聖遺物追加</p>
       </li>
       <li id="wepappendbutton" className="append-item appendwep" draggable="true" onDragStart={onDragStart}>
-        <img className="image" src="./img/klee3.png" alt="グラフの画像"/>
+        <img className="image" src={Klee3} alt="グラフの画像"/>
         <p className="append-text">武器追加</p>
       </li>
       <li className="append-item culc" draggable="true" onClick={StateCulc}>
-        <img className="image" src="./img/klee4.png" alt="グラフの画像"/>
+        <img className="image" src={Klee4} alt="グラフの画像"/>
         <p className="append-text">計算</p>
       </li>
-      <a href="https://twitter.com/share" className="twitter-share-button" data-via="よ" data-hashtags="原神">Tweet</a>
-      <script>{!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs')}</script>
     </ul>
   );
 }
@@ -324,8 +329,10 @@ class Damagestracture extends React.Component{
               if(x[i].children[j].type == droptype){
                 minid = this.fundindex(x[i].children);
                 if(minid==null)break;
-                let newform = {id:minid,type:droptype,children:[],data:initpara[droppedtype]};
+                let newform = {id:minid,type:droptype,children:[],data:initpara[droptype]};
+                console.log(newform.data);
                 if(!button) newform.data = Getstatedata(droptype,dropid);
+
                 x[i].children.splice(j+1,0,newform);
                 break;
               }else{
@@ -441,7 +448,8 @@ function Getstate(id){
     hr:0,　//A変換比率
     br:0,
     ahs:0, //スキル
-
+    r:0,
+    select:0,
   }
   for(let i=0; i<div.getElementsByTagName("input").length ;i++){
     let name = div.getElementsByTagName("input")[i].name;
@@ -506,15 +514,20 @@ function StateCulc(){
           }
         }
         statetotal.el = 25/9*statetotal.em/(1400+statetotal.em);
+        console.log(statetotal);
         optresult[count++] = optimize(statetotal);
       }
     }
   }
-  optresult[0]={"rate": [] };
+  optresult[0]={"rate": [],"maxrate":[],"expectmaxrate":[]};
   for(let index=optresult.length-1; index>=1 ;index--){
     optresult[0].rate[index-1]=[];
+    optresult[0].maxrate[index-1]=[];
+    optresult[0].expectmaxrate[index-1]=[];
     for(let p=0; p < optresult[1].a.length;p++){
-      optresult[0].rate[index-1][p] = Math.round(1000*optresult[index].damage[p]/optresult[1].damage[p])/1000;
+      optresult[0].rate[index-1][p] = Math.round(10000*optresult[index].damage[p]/optresult[1].damage[p])/10000;
+      optresult[0].maxrate[index-1][p] = Math.round(10000*optresult[index].maxdamage[p]/optresult[1].maxdamage[p])/10000;
+      optresult[0].expectmaxrate[index-1][p] = Math.round(10000*optresult[index].damagerate[p]/optresult[1].damagerate[p])/10000;
     }
   }
   console.log(optresult);
@@ -527,6 +540,7 @@ function StateCulc(){
 let damagecomp=[];
 let damageerr =[];
 let damage1=[];
+let damage2=[];
 function createwep(x,i){
   if(!document.getElementById("myChart"+(i+1))){
     let canvas =  document.createElement("canvas");
@@ -672,6 +686,7 @@ function createwep(x,i){
     },
   });
   */
+ 
   damagecomp[i+1] = new Chart(ctx, {
     type:'line',
     data:{
@@ -773,6 +788,7 @@ function createwep(x,i){
       }
     },
   });
+  /*
   if(!document.getElementById("MyChart"+(i+1))){  //error
     let canvas =  document.createElement("canvas");
     canvas.id = "MyChart"+(i+1);
@@ -892,11 +908,13 @@ function createwep(x,i){
       }
     },
   });
+  */
 }
 
 function createchart(x){
   let data = [];
   let damage =[];
+  let damageX =[];
   for(let i=0 ; i < x[0].rate.length; i++){ //ダメージ比較部分
     createwep(x,i);
     let dataset = {
@@ -932,7 +950,7 @@ function createchart(x){
         display:true,
         fontColor: 'rgb(195, 195, 195)',
         fontSize: 18,
-        text:"比較",
+        text:"期待値ダメージ比率",
       },
       plugins: {
          colorschemes: {
@@ -986,7 +1004,7 @@ function createchart(x){
     createwep(x,i);
     let dataset = {
       label:x[i+1].init.name,
-      data:x[i+1].damage,
+      data:x[0].expectmaxrate[i],
       backgroundColor: "rgba(0,0,0,0)",
       fill : "false",
       pointRadius: 0,
@@ -1017,7 +1035,7 @@ function createchart(x){
         display:true,
         fontColor: 'rgb(195, 195, 195)',
         fontSize: 18,
-        text:"比較",
+        text:"最大ダメージ比率",
       },
       plugins: {
          colorschemes: {
@@ -1066,14 +1084,99 @@ function createchart(x){
   };
   obb.data.datasets = damage;
   damage1[0] = new Chart(ctx1,obb);
+
+  for(let i=0 ; i < x[0].rate.length; i++){ //ダメージ比較部分
+    createwep(x,i);
+    let dataset = {
+      label:x[i+1].init.name,
+      data:x[0].expectmaxrate[i],
+      backgroundColor: "rgba(0,0,0,0)",
+      fill : "false",
+      pointRadius: 0,
+    };
+    damageX.push(dataset);
+  }
+  let ctx2 = document.getElementById("myChartX").getContext('2d');;
+  if(typeof damage2[0] !== 'undefined' && damage2[0]){
+    damage2[0].destroy();
+  }
+  let obb1 = {
+    type:'line',
+    data:{
+      labels:x[1].t,
+    },
+    options:{
+      tooltips: {
+          mode: 'index',
+          intersect: false,
+      },
+      legend: {
+        labels: {
+            fontColor: 'rgb(195, 195, 195)',
+            fontsize:40,
+        }
+      },
+      title:{
+        display:true,
+        fontColor: 'rgb(195, 195, 195)',
+        fontSize: 18,
+        text:"(期待値,最大値重み付き)ダメージ比率",
+      },
+      plugins: {
+         colorschemes: {
+           scheme: 'brewer.SetOne9'
+         }
+       },
+       scales:{
+         yAxes:[{
+           scaleLabel: {                 //軸ラベル設定
+              display: true,             //表示設定
+              labelString: "比率",  //ラベル
+             fontColor: 'rgb(195, 195, 195)',
+              fontSize: 22               //フォントサイズ
+           },
+           ticks: {
+             fontColor: 'rgb(195, 195, 195)',
+             fontSize:18,
+             suggestedMax: 1.1,
+             suggestedMin: 0.9,
+             //stepSize: 20,
+           }
+         }],
+         xAxes:[{
+           scaleLabel: {                 //軸ラベル設定
+              display: true,             //表示設定
+              labelString: '装備スコア',  //ラベル
+              fontColor: 'rgb(195, 195, 195)',
+              fontSize: 20               //フォントサイズ
+           },
+           ticks: {
+             fontColor: 'rgb(195, 195, 195)',
+             fontSize:15,
+             stepSize: 10,
+           }
+         }],
+       },
+      layout: {                             //レイアウト
+        padding: {                          //余白設定
+          left: 20,
+          right: 40,
+          top: 10,
+          bottom: 10,
+        }
+      },
+    }
+  };
+  obb1.data.datasets = damageX;
+  damage2[0] = new Chart(ctx2,obb1);
 }
 
 
 function optimize(state){
-  const maxT = 140;
-  const loopnum = 70;
+  const maxT = 150;
+  const loopnum = 75;
   let maxdivloop = maxT/loopnum;
-  const optimizeresult = {a:[], b:[], h:[], c:[], d:[],t:[],damage:[],error:{a:[],b:[],h:[],c:[],d:[],e:[],em:[]}};
+  const optimizeresult = {a:[], b:[], h:[], c:[], d:[],t:[],damage:[],maxdamage:[],damagerate:[],error:{a:[],b:[],h:[],c:[],d:[],e:[],em:[]}};
   for(let p=0 ; p<=loopnum ; p++){
     let epp = 0.1;
     let da = 10;
@@ -1086,7 +1189,7 @@ function optimize(state){
     }
     let di;
     epp = 0.1;
-    for(let i=0 ; Math.abs((db-da)/db) >  1e-10 ; i++){
+    for(let i=0 ; Math.abs((db-da)/db) >  1e-9 ; i++){
       di = diff(state,x);
       x.a = x.a - epp * di.a;
       x.b = x.b - epp * di.b;
@@ -1105,40 +1208,34 @@ function optimize(state){
     optimizeresult.d.push( Math.round(10*(x.d+state.d))/10 );
     optimizeresult.h.push( Math.round(10*(x.h+state.h))/10 );
     optimizeresult.t.push( maxT/loopnum * p);
-    optimizeresult.damage.push( -Math.round(10*(damage(state,x)))/10);
-
+    optimizeresult.damage.push( -Math.round(10*(damagefinal(state,x)))/10);　//期待値
+    optimizeresult.maxdamage.push( -Math.round(10*(maxdamage(state,x)))/10); //最大値
+    optimizeresult.damagerate.push( -Math.round(10*(damage(state,x)))/10); //期待値-最大値
     let y = Object.assign({},x);
     let i = 10;
     y.a = y.a + 1.5*i;
-    di.a = damage(state,y)/damage(state,x);
+    di.a = damagefinal(state,y)/damagefinal(state,x);
     y = Object.assign({},x);
     y.b = y.b + 1.8*i;
-    di.b = damage(state,y)/damage(state,x);
+    di.b = damagefinal(state,y)/damagefinal(state,x);
     y = Object.assign({},x);
     y.h = y.h + 1.5*i;
-    di.h = damage(state,y)/damage(state,x);
+    di.h = damagefinal(state,y)/damagefinal(state,x);
     y = Object.assign({},x);
     y.c = y.c + 1*i;
-    di.c = damage(state,y)/damage(state,x);
+    di.c = damagefinal(state,y)/damagefinal(state,x);
     y = Object.assign({},x);
     y.d = y.d + 2*i;
-    di.d = damage(state,y)/damage(state,x);
+    di.d = damagefinal(state,y)/damagefinal(state,x);
 
     y = Object.assign({},state);
     y.e = y.e + 1.5*i;
-    di.e = damage(y,x)/damage(state,x);
+    di.e = damagefinal(y,x)/damagefinal(state,x);
 
     y = Object.assign({},state);
     y.em = y.em + 6*i;
     y.el = 25/9*y.em/(1400+y.em);
-    di.em = damage(y,x)/damage(state,x);
-    /*
-    di.d = di.d*2;
-    di.a = di.a*1.5/di.d;
-    di.b = di.b*1.8/di.d;
-    di.h = di.h*1.5/di.d;
-    di.c = di.c*1/di.d;
-    di.d = 1;*/
+    di.em = damagefinal(y,x)/damagefinal(state,x);
     let r = 100000;
     optimizeresult.error.a.push(Math.round(r*di.a)/r);
     optimizeresult.error.b.push(Math.round(r*di.b)/r);
@@ -1147,67 +1244,7 @@ function optimize(state){
     optimizeresult.error.d.push(Math.round(r*di.d)/r);
     optimizeresult.error.e.push(Math.round(r*di.e)/r);
     optimizeresult.error.em.push(Math.round(r*di.em)/r);
-    /*
-    let er=0.02;
-    let y = Object.assign({},x);
-    y.a = x.a + 2*er*damage(state,x)/di.a;
-    optimizeresult.error.a.up.push(Math.round(10*(y.a+state.a))/10);
-    y.a = x.a - 2*er*damage(state,x)/di.a;
-    optimizeresult.error.a.down.push(Math.round(10*(y.a+state.a))/10);
-    y = Object.assign({},x);
-    y.b = x.b + 2*er*damage(state,x)/di.b;
-    optimizeresult.error.b.up.push(Math.round(10*(y.b+state.b))/10);
-    y.b = x.b - 2*er*damage(state,x)/di.b;
-    optimizeresult.error.b.down.push(Math.round(10*(y.b+state.b))/10);
 
-    y = Object.assign({},x);
-    y.h = x.h + 2*er*damage(state,x)/di.h;
-    optimizeresult.error.h.up.push(Math.round(10*(y.h+state.h))/10);
-    y.h = x.h - 2*er*damage(state,x)/di.h;
-    optimizeresult.error.h.down.push(Math.round(10*(y.h+state.h))/10);
-
-    y = Object.assign({},x);
-    y.c = x.c + 2*er*damage(state,x)/di.c;
-    optimizeresult.error.c.up.push(Math.round(10*(y.c+state.c))/10);
-    y.c = x.c - 2*er*damage(state,x)/di.c;
-    optimizeresult.error.c.down.push(Math.round(10*(y.c+state.c))/10);
-
-    y = Object.assign({},x);
-    y.d = x.d + 2*er*damage(state,x)/di.d;
-    optimizeresult.error.d.up.push(Math.round(10*(y.d+state.d))/10);
-    y.d = x.d - 2*er*damage(state,x)/di.d;
-    optimizeresult.error.d.down.push(Math.round(10*(y.d+state.d))/10);
-    if(Math.abs(di.a)<0.01){
-      optimizeresult.error.a.up.pop();
-      optimizeresult.error.a.down.pop();
-      optimizeresult.error.a.up.push(state.a);
-      optimizeresult.error.a.down.push(state.a);
-    }
-    if(Math.abs(di.b)<0.01){
-      optimizeresult.error.b.up.pop();
-      optimizeresult.error.b.down.pop();
-      optimizeresult.error.b.up.push(state.b);
-      optimizeresult.error.b.down.push(state.b);
-    }
-    if(Math.abs(di.h)<0.01){
-      optimizeresult.error.h.up.pop();
-      optimizeresult.error.h.down.pop();
-      optimizeresult.error.h.up.push(state.h);
-      optimizeresult.error.h.down.push(state.h);
-    }
-    if(Math.abs(di.c)<0.01){
-      optimizeresult.error.c.up.pop();
-      optimizeresult.error.c.down.pop();
-      optimizeresult.error.c.up.push(state.c);
-      optimizeresult.error.c.down.push(state.c);
-    }
-    if(Math.abs(di.d)<0.01){
-      optimizeresult.error.d.up.pop();
-      optimizeresult.error.d.down.pop();
-      optimizeresult.error.d.up.push(state.d);
-      optimizeresult.error.d.down.push(state.d);
-    }
-    */
   }
   optimizeresult.name = state.name;
   optimizeresult.init = state;
@@ -1219,8 +1256,38 @@ function damage(init,x){
   let a3 = init.br /100 * ( init.bb * (1 + init.b/100 + x.b/100 ) + init.bc ); //B
   let a4 = init.ahs/100 * ( init.hb * (1 + init.h/100 + x.h/100 ) + init.hc ); //HP→A skill
   if(a4 >= init.ab*4) a4 = init.ab*4;
+
   if(init.ema-1<0.01){
-    let damage = 0.9*0.5*(a1+a2+a3+a4)*( 1 + ( init.c + x.c)*( init.d + x.d )/10000 )*( 1 + init.e/100 );
+    let damage = 0.9*0.5*(a1+a2+a3+a4)*( 1 +  ( (init.c + x.c)/100*(1-init.r/100) + init.r/100)*( init.d + x.d )/100 )*( 1 + init.e/100 );
+    return(-damage);
+  }else{
+    let damage = 0.9*0.5*(a1+a2+a3+a4)*( 1 + ( (init.c + x.c)/100*(1-init.r/100) + init.r/100)*( init.d + x.d )/100 )*( 1 + init.e/100 )*(init.ema*(1 + init.ea/100 + init.el) );
+    return(-damage);
+  }
+}
+
+function maxdamage(init,x){
+  let a1 = init.ar /100 * ( init.ab * (1 + init.a/100 + x.a/100 ) + init.ac ); //A
+  let a2 = init.hr /100 * ( init.hb * (1 + init.h/100 + x.h/100 ) + init.hc ); //HP
+  let a3 = init.br /100 * ( init.bb * (1 + init.b/100 + x.b/100 ) + init.bc ); //B
+  let a4 = init.ahs/100 * ( init.hb * (1 + init.h/100 + x.h/100 ) + init.hc ); //HP→A skill
+  if(a4 >= init.ab*4) a4 = init.ab*4;
+  if(init.ema-1<0.01){
+    let damage = 0.9*0.5*(a1+a2+a3+a4)*( 1 + ( init.d + x.d )/100 )*( 1 + init.e/100 );
+    return(-damage);
+  }else{
+    let damage = 0.9*0.5*(a1+a2+a3+a4)*( 1 +( init.d + x.d )/100 )*( 1 + init.e/100 )*(init.ema*(1 + init.ea/100 + init.el) );
+    return(-damage);
+  }
+}
+function damagefinal(init,x){
+  let a1 = init.ar /100 * ( init.ab * (1 + init.a/100 + x.a/100 ) + init.ac ); //A
+  let a2 = init.hr /100 * ( init.hb * (1 + init.h/100 + x.h/100 ) + init.hc ); //HP
+  let a3 = init.br /100 * ( init.bb * (1 + init.b/100 + x.b/100 ) + init.bc ); //B
+  let a4 = init.ahs/100 * ( init.hb * (1 + init.h/100 + x.h/100 ) + init.hc ); //HP→A skill
+  if(a4 >= init.ab*4) a4 = init.ab*4;
+  if(init.ema-1<0.01){
+    let damage = 0.9*0.5*(a1+a2+a3+a4)*( 1 + (init.c + x.c)*( init.d + x.d )/10000 )*( 1 + init.e/100 );
     return(-damage);
   }else{
     let damage = 0.9*0.5*(a1+a2+a3+a4)*( 1 + ( init.c + x.c)*( init.d + x.d )/10000 )*( 1 + init.e/100 )*(init.ema*(1 + init.ea/100 + init.el) );
@@ -1258,7 +1325,7 @@ function diff(init,x){
   return(diff);
 }
 function cons(init,x){
-  let tproj = (x) => {
+  const tproj = (x) => {
     let p = (x.t-x.a/1.5-x.b/1.8-x.h/1.5-x.c-x.d/2) / ( 1/(1.5*1.5)+ 1/(1.8*1.8)+ 1/(1.5*1.5)+ 1+ 1/4);
     x.a = x.a + p / 1.5;
     x.b = x.b + p / 1.8;
@@ -1266,17 +1333,17 @@ function cons(init,x){
     x.c = x.c + p;
     x.d = x.d + p / 2;
   };
-  let nproj = (init,x) =>{
+  const nproj = (init,x) =>{
     if(x.a<0) x.a=0;
     if(x.b<0) x.b=0;
     if(x.h<0) x.h=0;
     if(x.c<0) x.c=0;
-    if(x.c+init.c>100){
-      x.c=100-init.c;
+    if( x.c+init.c > 100){
+      x.c = 100-init.c; 
     }
     if(x.d<0) x.d=0;
   };
-  for(let i=0; i<20;i++){
+  for(let i=0; i<30;i++){
     tproj(x);
     nproj(init,x);
   }
