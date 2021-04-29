@@ -1258,10 +1258,10 @@ function damage(init,x){
   if(a4 >= init.ab*4) a4 = init.ab*4;
 
   if(init.ema-1<0.01){
-    let damage = 0.9*0.5*(a1+a2+a3+a4)*( 1 +  ( (init.c + x.c)/100*(1-init.r/100) + init.r/100)*( init.d + x.d )/100 )*( 1 + init.e/100 );
+    let damage = 0.9*0.5*(a1+a2+a3+a4)*( 1 +  ( (init.c + x.c)/100*(1-init.r/100) + init.r/100)*(( init.d + x.d )/100) )*( 1 + init.e/100 );
     return(-damage);
   }else{
-    let damage = 0.9*0.5*(a1+a2+a3+a4)*( 1 + ( (init.c + x.c)/100*(1-init.r/100) + init.r/100)*( init.d + x.d )/100 )*( 1 + init.e/100 )*(init.ema*(1 + init.ea/100 + init.el) );
+    let damage = 0.9*0.5*(a1+a2+a3+a4)*( 1 + ( (init.c + x.c)/100*(1-init.r/100) + init.r/100)*(( init.d + x.d )/100) )*( 1 + init.e/100 )*(init.ema*(1 + init.ea/100 + init.el) );
     return(-damage);
   }
 }
