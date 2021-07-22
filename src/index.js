@@ -34,7 +34,7 @@ const stat={
   ahs:"HPのx%をAに変換", //スキル
   s:"",
   r:"期待値-最大値比",
-  select:"厳選レベル",
+  select:"反応率",
   n:undefined,
 }
 const chainitpara = [{ab:300},{hb:15000},{bb:800},{c:5},{d:50},{e:0},{s:0},{s:0},{s:0},{s:0},{ema:1},{em:0}];
@@ -525,9 +525,12 @@ function StateCulc(){
     optresult[0].maxrate[index-1]=[];
     optresult[0].expectmaxrate[index-1]=[];
     for(let p=0; p < optresult[1].a.length;p++){
-      optresult[0].rate[index-1][p] = Math.round(10000*optresult[index].damage[p]/optresult[1].damage[p])/10000;
-      optresult[0].maxrate[index-1][p] = Math.round(10000*optresult[index].maxdamage[p]/optresult[1].maxdamage[p])/10000;
-      optresult[0].expectmaxrate[index-1][p] = Math.round(10000*optresult[index].damagerate[p]/optresult[1].damagerate[p])/10000;
+      //optresult[0].rate[index-1][p] = Math.round(10000*optresult[index].damage[p]/optresult[1].damage[p])/10000;
+      //optresult[0].maxrate[index-1][p] = Math.round(10000*optresult[index].maxdamage[p]/optresult[1].maxdamage[p])/10000;
+      //optresult[0].expectmaxrate[index-1][p] = Math.round(10000*optresult[index].damagerate[p]/optresult[1].damagerate[p])/10000;
+      optresult[0].rate[index-1][p] = Math.round(10000*optresult[index].damage[p])/10000;
+      optresult[0].maxrate[index-1][p] = Math.round(10000*optresult[index].maxdamage[p])/10000;
+      optresult[0].expectmaxrate[index-1][p] = Math.round(10000*optresult[index].damagerate[p])/10000;
     }
   }
   console.log(optresult);
@@ -1004,7 +1007,7 @@ function createchart(x){
     createwep(x,i);
     let dataset = {
       label:x[i+1].init.name,
-      data:x[0].expectmaxrate[i],
+      data:x[0].maxrate[i],
       backgroundColor: "rgba(0,0,0,0)",
       fill : "false",
       pointRadius: 0,
@@ -1189,7 +1192,7 @@ function optimize(state){
     }
     let di;
     epp = 0.1;
-    for(let i=0 ; Math.abs((db-da)/db) >  1e-9 ; i++){
+    for(let i=0 ; Math.abs((db-da)/db) >  1e-10 ; i++){
       di = diff(state,x);
       x.a = x.a - epp * di.a;
       x.b = x.b - epp * di.b;
@@ -1261,8 +1264,9 @@ function damage(init,x){
     let damage = 0.9*0.5*(a1+a2+a3+a4)*( 1 +  ( (init.c + x.c)/100*(1-init.r/100) + init.r/100)*(( init.d + x.d )/100) )*( 1 + init.e/100 );
     return(-damage);
   }else{
-    let damage = 0.9*0.5*(a1+a2+a3+a4)*( 1 + ( (init.c + x.c)/100*(1-init.r/100) + init.r/100)*(( init.d + x.d )/100) )*( 1 + init.e/100 )*(init.ema*(1 + init.ea/100 + init.el) );
-    return(-damage);
+    let damageref = 0.9*0.5*(a1+a2+a3+a4)*( 1 + ( (init.c + x.c)/100*(1-init.r/100) + init.r/100)*(( init.d + x.d )/100) )*( 1 + init.e/100 )*(init.ema*(1 + init.ea/100 + init.el) );
+    let damagenoref = 0.9*0.5*(a1+a2+a3+a4)*( 1 + ( (init.c + x.c)/100*(1-init.r/100) + init.r/100)*(( init.d + x.d )/100) );
+    return(-damageref*(init.select/100)-damagenoref*(1-init.select/100));
   }
 }
 
@@ -1290,8 +1294,9 @@ function damagefinal(init,x){
     let damage = 0.9*0.5*(a1+a2+a3+a4)*( 1 + (init.c + x.c)*( init.d + x.d )/10000 )*( 1 + init.e/100 );
     return(-damage);
   }else{
-    let damage = 0.9*0.5*(a1+a2+a3+a4)*( 1 + ( init.c + x.c)*( init.d + x.d )/10000 )*( 1 + init.e/100 )*(init.ema*(1 + init.ea/100 + init.el) );
-    return(-damage);
+    let damageref = 0.9*0.5*(a1+a2+a3+a4)*( 1 + ( init.c + x.c)*( init.d + x.d )/10000 )*( 1 + init.e/100 )*(init.ema*(1 + init.ea/100 + init.el) );
+    let damagenoref = 0.9*0.5*(a1+a2+a3+a4)*( 1 + ( init.c + x.c)*( init.d + x.d )/10000 )*( 1 + init.e/100 );
+    return(-damageref*(init.select/100)-damagenoref*(1-init.select/100));
   }
 }
 function diff(init,x){
